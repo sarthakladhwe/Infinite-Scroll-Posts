@@ -35,6 +35,23 @@ async function showPosts() {
     })
 }
 
+// Filter Posts by input
+function filterPosts(event) {
+    const term = event.target.value.toUpperCase();
+    const posts = document.querySelectorAll('.post')
+
+    posts.forEach(post => {
+        const title = post.querySelector('.post-title').innerText.toUpperCase();
+        const body = post.querySelector('.post-body').innerText.toUpperCase();
+
+        if(title.includes(term) || body.includes(term)) {
+            post.style.display = 'flex'
+        } else {
+            post.style.display = 'none'
+        }
+    })
+}
+
 //Show initial posts
 showPosts()
 
@@ -60,4 +77,8 @@ window.addEventListener('scroll', () => {
         showLoading();
     }
 })
+
+// Event Listeners
+
+filter.addEventListener('input', filterPosts)
 
